@@ -1,3 +1,5 @@
+USE bootcamp.northern_star;
+
 -- 1 zadatak: Колико утакмица је одиграно у фебруару 2025?
 SELECT
     COUNT(*)
