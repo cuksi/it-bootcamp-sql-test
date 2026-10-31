@@ -22,10 +22,10 @@
 ### Deo D - modeliranje: zvezda za disciplinu
 1) Jedan red u tabeli fact_card predstavlja svaki događaj gde smo imali karton (žuti, drugi žuti ili crveni karton) na svakoj utakmici.  
 2) Ključevi u fact_card tabeli su:
-#### * match_id za vezu sa tabelom matches (gde su sve utakmice)
-#### * date_key za vezu sa tabelom dim_date (kalendar),
-#### * player_id za vezu sa tabelom dim_player (gde su svi igrači)
-#### * referee_id za vezu sa tabelom dim_referee (gde su sve sudije)
-#### * team_id za vezu sa tabelom dim_team (gde su svi klubovi)
-#### * event_id za vezu sa tabelom match_events (gde immamo dodgađaje tj. kartone koji se traže)
+* match_id za vezu sa tabelom matches (gde su sve utakmice)
+* date_key za vezu sa tabelom dim_date (kalendar),
+* player_id za vezu sa tabelom dim_player (gde su svi igrači)
+* referee_id za vezu sa tabelom dim_referee (gde su sve sudije)
+* team_id za vezu sa tabelom dim_team (gde su svi klubovi)
+* event_id za vezu sa tabelom match_events (gde immamo dodgađaje tj. kartone koji se traže)
 3) Mislim da je potrebno da kartoni imaju svoju tabelu činjenica zato što možemo lakše da vidimo disciplinu igrača i klubova. Bez komplikovanih upita jer ovde imamo pregled svih bitnih podataka o disciplini igrača i klubova na jednom mestu.
