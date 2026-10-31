@@ -8,7 +8,7 @@
 - Informacije o stadionima, lokacija i posete (prosečna, ukupna, bez poseta itd.)  
 ## Predpostavke
 ### Deo A - pitanja o podacima
-- Zadatak 5: Predpostavljeno je da se trazi ukupna prosecna posecenost za sve klubove u sezoni.
+- Zadatak 5: Za računanje prosečne posećenosti nisu uzete u obzir utakmice koje imaju NULL vrednost, pošto za teutakmice nemamo podatke (yato je promenjeno da se koristi AVG() funkcija). Takođe u sezoni 2023/24 nismo računali utakmicu koja je otkazana (ima status abandoned).  
 - Zadatak 7: Ovde je pretpostavljeno da se traze i auto golovi, pa su i oni uracunati u resenje.  
 ### Deo B - izvestaj o sezoni 2024/25
 0) Sve vrednosti u izvestaju su zaokruzene na dve decimale

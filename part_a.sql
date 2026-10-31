@@ -42,14 +42,14 @@ WHERE m.home_goals = 1 AND m.away_goals = 1;
 -- 5 zadatak: Колика је просечна посета по сезони?
 SELECT
     m.season AS sezona,
-    ROUND(SUM(m.attendance) / COUNT(m.match_id) , 2) AS prosecna_poseta
+    ROUND(AVG(attendance) , 2) AS prosecna_poseta
 FROM matches m
 WHERE m.status = 'played'
 GROUP BY m.season;
 -- Rezultat:
 -- sezona	    prosecna_poseta
--- 2023/24	    23765.12
--- 2024/25	    23626.35
+-- 2023/24	    24276.2
+-- 2024/25	    24199.49
 
 -- 6 zadatak: Колико голова је дато из пенала по сезони?
 -- penalty_goal
@@ -92,24 +92,16 @@ ORDER BY broj_utakmica DESC LIMIT 1;
 -- Resenje: Peter Lindgren je sudio najvise utakmica timu Northport United, to je 9 utakmica.
 
 -- 9 zadatak: Који судија је у сезони 2024/25 имао највећи удео утакмица у којима је досуђен бар један пенал, дат или промашен?
-WITH sudija_penal AS (
-    SELECT
-        r.referee_name,
-        SUM(
-            CASE WHEN me.event_type = 'penalty_goal' THEN 1 
-                WHEN me.event_type = 'penalty_miss' THEN 1 
-                END
-        ) AS tot_penalty
-    FROM referees AS r
-    LEFT JOIN matches m ON r.referee_id = m.referee_id
-    JOIN match_events me ON m.match_id = me.match_id
-    WHERE m.season = '2024/25'
-    GROUP BY r.referee_name
-)
 SELECT
-    referee_name,
-    ROUND(tot_penalty / (SELECT COUNT(*) FROM matches WHERE season = '2024/25') * 100, 2) AS udeo
-FROM sudija_penal
+    r.referee_name,
+    COUNT(DISTINCT m.match_id)  AS ukupno_sudio_utakmica,
+    COUNT(DISTINCT me.match_id) AS utakmice_sa_penalom,
+    ROUND(utakmice_sa_penalom / ukupno_sudio_utakmica * 100.0, 2) AS udeo
+FROM matches m
+JOIN referees r ON r.referee_id = m.referee_id
+LEFT JOIN match_events me ON me.match_id = m.match_id AND me.event_type IN ('penalty_goal', 'penalty_miss')
+WHERE m.season = '2024/25'
+GROUP BY r.referee_id, r.referee_name
 ORDER BY udeo DESC LIMIT 1;
 -- Resenje: Peter Lindgren ima najveci udeo 3.68
 
