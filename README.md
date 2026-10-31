@@ -19,3 +19,13 @@
 2) Nije racunata utakmica koja nema zabelezenu posetu. Ako se za nju stavi nula onda ce nam prosek biti niži.
 3) Ovde nisu uzeti u obzir autogolovi, samo regularni golovi i golovi iz penala su uzeti u obzir. Dodato i minute i added_time u ORDER BY zbog preciznost koji je igrač dao zadnji gol.
 5) Pošto u zadatku piše da pratimo bodove kluba Northport City dati su bodovi od početka sezone. A da je trebala samo utakmica u kojoj je presao 50 bodova dodali bi na kraju query-a samo ovaj uslov: ORDER BY pts_so_far > 50 DESC LIMIT 1
+### Deo D - modeliranje: zvezda za disciplinu
+1) Jedan red u tabeli fact_card predstavlja svaki događaj gde smo imali karton (žuti, drugi žuti ili crveni karton) na svakoj utakmici.  
+2) Ključevi u fact_card tabeli su: 
+* match_id za vezu sa tabelom matches (gde su sve utakmice)
+* date_key za vezu sa tabelom dim_date (kalendar),
+* player_id za vezu sa tabelom dim_player (gde su svi igrači)
+* referee_id za vezu sa tabelom dim_referee (gde su sve sudije)
+* team_id za vezu sa tabelom dim_team (gde su svi klubovi)
+* event_id za vezu sa tabelom match_events (gde immamo dodgađaje tj. kartone koji se traže)
+3) Mislim da je potrebno da kartoni imaju svoju tabelu činjenica zato što možemo lakše da vidimo disciplinu igrača i klubova. Bez komplikovanih upita jer ovde imamo pregled svih bitnih podataka o disciplini igrača i klubova na jednom mestu.
